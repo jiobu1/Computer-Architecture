@@ -174,7 +174,7 @@ Glossary:
 
 Machine code values shown in both binary and hexadecimal.
 
-### ADD
+### ADD[x]
 
 *This is an instruction handled by the ALU.*
 

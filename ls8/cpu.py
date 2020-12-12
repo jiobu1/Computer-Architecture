@@ -49,6 +49,9 @@ class CPU:
         if op == MUL:
             self.registers[reg_a] *= self.registers[reg_b]
             self.pc += 3
+        if op == ADD:
+            self.registers[reg_a] += self.registers[reg_b]
+            self.pc += 3 # tried it with and without this
         else:
             raise Exception("Unsupported ALU operation")
 
@@ -97,6 +100,8 @@ class CPU:
             self.registers[operand_a] = operand_b
             self.pc += 3
         elif instruction == MUL:
+            self.alu(instruction, operand_a, operand_b)
+        elif instruction == ADD:
             self.alu(instruction, operand_a, operand_b)
         elif instruction == PUSH:
             # decrement the stack pointer
