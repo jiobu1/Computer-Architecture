@@ -9,7 +9,8 @@ MUL = 0b10100010
 POP = 0b01000110
 PUSH = 0b01000101
 CALL = 0b01010000
-RET = 0b01010000
+RET = 0b00010001
+ADD = 0b10100000
 SP = 7
 
 class CPU:
@@ -49,7 +50,7 @@ class CPU:
         if op == MUL:
             self.registers[reg_a] *= self.registers[reg_b]
             self.pc += 3
-        if op == ADD:
+        elif op == ADD:
             self.registers[reg_a] += self.registers[reg_b]
             self.pc += 3 # tried it with and without this
         else:
@@ -71,7 +72,7 @@ class CPU:
         ), end='')
 
         for i in range(8):
-            print(" %02X" % self.reg[i], end='')
+            print(" %02X" % self.registers[i], end='')
 
         print()
 
@@ -88,6 +89,7 @@ class CPU:
             operand_a = self.ram_read(self.pc + 1)
             operand_b = self.ram_read(self.pc + 2)
             self.execute_instruction(instruction_to_execute, operand_a, operand_b)
+            self.trace()
 
     def execute_instruction(self, instruction, operand_a, operand_b):
         if instruction == HLT:

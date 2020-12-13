@@ -124,7 +124,7 @@ class CPU:
     def push_val(self, val):
         self.reg[SP] -= 1
         self.ram_write(val, self.reg[7])
-        
+
     def pop_val(self):
         val = self.ram_read(self.reg[7])
         self.reg[SP] += 1
@@ -308,7 +308,7 @@ class CPU:
 ​
     def op_jmp(self, operand_a, operand_b):
         self.pc = self.reg[operand_a]
-                
+
     def op_jeq(self, operand_a, operand_b):
         if self.fl & FL_EQ:
             self.pc = self.reg[operand_a]
