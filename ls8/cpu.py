@@ -55,7 +55,7 @@ class CPU:
         self.halted = False
 
         self.flag = 0
-        self.inst_set_pc = False   # Some instructions set the PC directly [CALL, JMP, JEQ, JNE]
+        self.inst_set_pc = False            # Some instructions set the PC directly [CALL, JMP, JEQ, JNE]
 
         #  Table for fast lookups
         self.execute = {
