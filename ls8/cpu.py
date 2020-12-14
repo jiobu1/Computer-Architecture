@@ -52,7 +52,6 @@ class CPU:
             self.pc += 3
         elif op == ADD:
             self.registers[reg_a] += self.registers[reg_b]
-            self.pc += 3 # tried it with and without this
         else:
             raise Exception("Unsupported ALU operation")
 
@@ -61,6 +60,10 @@ class CPU:
         Handy function to print out the CPU state. You might want to call this
         from run() if you need help debugging.
         """
+        print(f"pc {bin(self.pc)}")
+        print(f"memory address {self.ram_read(self.pc)}")
+        print(f"operand_a {self.ram_read(self.pc + 1)}")
+        print(f"operand_b {self.ram_read(self.pc + 2)}")
 
         print(f"TRACE: %02X | %02X %02X %02X |" % (
             self.pc,
@@ -103,8 +106,6 @@ class CPU:
             self.pc += 3
         elif instruction == MUL:
             self.alu(instruction, operand_a, operand_b)
-        elif instruction == ADD:
-            self.alu(instruction, operand_a, operand_b)
         elif instruction == PUSH:
             # decrement the stack pointer
             self.registers[SP] -= 1
@@ -120,8 +121,9 @@ class CPU:
             self.ram_write(operand_b, self.registers[SP])
             self.pc = self.registers[operand_a]
         elif instruction == RET:
-            self.registers[SP] += 1
             self.pc = self.registers[SP]
+            self.registers[SP] += 1
         else:
             print("idk what to do.")
             pass
+
